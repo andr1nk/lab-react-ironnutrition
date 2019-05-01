@@ -11,7 +11,8 @@ import Search from "./components/Search";
 class App extends Component {
 
   state = {
-    foods: foodsJSON
+    foods: foodsJSON,
+    filteredFoods: foodsJSON
   }
 
   addFood = food => {
@@ -25,16 +26,14 @@ class App extends Component {
 
   searchFood = search => {
     console.log("search is :" + search)
-    const foodsCopy = this.state.foods.slice()
+    // const foodsCopy = this.state.foods.slice()
     
-    foodsCopy.filter(el => {
-      console.log(el.name.includes(search))      
-      el.name.includes(search)
+    const foodsCopy = this.state.foods.filter(el => {
+      return el.name.toLowerCase().includes(search.toLowerCase())
     })
-    console.log(foodsCopy)
 
     this.setState({
-      foods: foodsCopy
+      filteredFoods: foodsCopy
     })
 
   }
@@ -49,7 +48,7 @@ class App extends Component {
           <Search searchFood={this.searchFood} />
         </div>
         <div className="foodList">
-          {this.state.foods.map((food, index) => (
+          {this.state.filteredFoods.map((food, index) => (
             <FoodBox key={index} food={food} />
           ))}
         </div>
