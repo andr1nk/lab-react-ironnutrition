@@ -4,6 +4,7 @@ import './App.css';
 import 'bulma/css/bulma.css';
 import foodsJSON from './foods.json';
 import FoodBox from "./components/FoodBox";
+import FoodForm from "./components/FoodForm";
 
 
 class App extends Component {
@@ -12,14 +13,25 @@ class App extends Component {
     foods: foodsJSON
   }
 
+  addFood = food => {
+    const foodsCopy = this.state.foods.slice()
+    foodsCopy.unshift(food)
+
+    this.setState ({
+      foods: foodsCopy
+    })
+  }
+
   render() {
     return (
       <div className="App">
-        <div>
+      <div>
+        <FoodForm addFood={this.addFood}/>
+      </div>
+        <div className="foodList">
           {this.state.foods.map((food, index) => (
             <FoodBox key={index} food={food} />
           ))}
-
         </div>
       </div>
     );
