@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 export default class FoodBox extends Component {
   render() {
-    console.log(this.props)
     let {food} = this.props
     return (
       <div className="box">
